@@ -1,0 +1,563 @@
+// const express = require('express');
+// const server = express()
+
+// let Admin=[];
+
+// let Teacher=[];
+
+// let Student=[];
+
+// let courses=[];
+
+// server.use(express.json());
+
+// //REGISTER
+// server.post('/register',(req,res)=>{
+//     if(req.body.role == "admin"){
+//         Admin.push(req.body)
+//         res.json("YOU ARE AN ADMIN")
+//     };
+
+//     if(req.body.role=="teacher"){
+//         Teacher.push(req.body);
+//         res.json("YOU ARE A TEACHER")
+//     };
+
+//     if(req.body.role=="student"){
+//         Student.push(req.body);
+//         res.json("YOU ARE A STUDENT")
+
+//     }
+//     else{
+//         res.json("ERROR YOUR ROLE IS INVALID");
+//     }
+// });
+
+
+
+
+
+// //LOGIN
+// server.post('/login',(req,res) =>{
+//     let information = req.body;
+//     if(req.body.role == "admin"){
+//         for(let i=0; i<Admin.length; i++){
+//             if(Admin[i].username==information.username && Admin[i].password==information.password){
+//                 res.status(200).json("YOU HAVE LOGGED IN ")
+//             }
+           
+//         }
+//         res.status(400).json("WRONG INFORMATION PASSED")
+//     }
+
+//     if (req.body.role=="teacher"){
+//         for(let i=0; i<Teacher.length; i++){
+//             if(Teacher[i].username==information.username && Teacher[i].password==information.password){
+//                 res.status(200).json("YOU HAVE LOGGED IN ")
+//             }
+//         }
+//         res.status(400).json("WRONG INFORMATION PASSED")
+//     }
+
+//     if (req.body.role=="student"){
+//         for(let i=0; i<Student.length; i++){
+//             if(Student[i].username==information.username && Student[i].password==information.password){
+//                 res.status(200).json("YOU HAVE LOGGED IN ")
+//             }
+//         }
+//         res.status(400).json("WRONG INFORMATION PASSED")
+//     }
+//     res.status(400).json("INVALID USER CREDENTIALS")
+// });
+
+// // create a course as an admin 
+// server.post("/adminCourse/:role",(req,res)=>{
+//     if(req.params.role=="admin"){
+//         Courses.push(req.body)
+//         res.json("Course created successfully");
+//     }
+//     res.json("UNAUTHORISED");
+// });
+// //view course as an admin
+// server.get("/courses/:role",(req,res)=>{
+//     if(req.params.role=="admin"){
+    
+//         res.json(courses);
+//     }
+//     res.json("UNAVAILABLE");
+// })
+
+// //view student as admin
+// server.get("/view-student/:role",(req,res)=>{
+//     if(req.params.role=="admin"){
+//         res.json(Students)
+
+//     }
+//     res.json("UNAVAILABLE")
+// });
+
+
+// //view admin as an admin
+// server.get("/view-admin/:role",(req,res)=>{
+//     if(req.params.role=="admin"){
+        
+//         res.json(`The admin informations are: ${admin}`);
+//     }
+//     res.json("YOU ARE NOT AUTHORIZED");
+// });
+
+// //get list of teachers as an admin
+// server.get("/view-teachers/:role",(req,res)=>{
+//     if(req.params.role=="admin"){
+//         res.json(teacher);
+//     }
+//     res.json("UNAVAILABLE")
+// });
+
+
+// //get a particular admin
+// server.get("/get-admin/:role",(req,res)=>{
+//     for(let i=0; i<= admin.length; i++){
+//         if(admin[i].username==req.body.username&& req.params.role=="admin"){
+//             res.json(admin[i])
+//         }
+//     }res.json("NOT FOUND")
+// });
+
+// //reset password for the admin
+// server.put("/resetAdminPassword/:username",(req,res)=>{
+//     for(let key in admin){
+//         if ( admin[key].username==req.body.username) {
+//             admin[key].password==req.body.password ;
+//             res.json("ADMIN PASSWORD CHANGED SUCCESSFULLY")
+// };
+//     res.json("ADMIN NOT FOUND");
+// }
+// });
+
+// //Drop a course
+// server.delete("/drop-course/:role"),(req,res)=>{
+//     if(req.params.role === "admin"){
+//         for(let i=0; i>Course.length;i++){
+//             if(Course[i].username==req.body.username){
+//                 deletedCourse.splice(i,1)
+//             }
+//         }
+//         res.status(200).json({deletedCourse,message:"Course Deleted Succeessfully"})
+//         }
+//         else{res.status(400).json("Unauthorized")
+//     }
+// };
+
+
+// //drop a student
+// server.delete("/drop-student/:role"),(req,res)=>{
+//     if(req,params.role === "admin"){
+//         for(let i=0; i>Student.length;i++){
+//             if(Student[i].username==req.body.username){
+//                 deletedStudent.splice(i,1)
+//             }
+//         }
+//         res.status(200).json({deletedStudent,message:"Student Deleted Succeessfully"})
+//         }
+//         else{status(400).json("Unauthorized")
+//     }
+// };
+
+
+// // get a student profile as a student
+// server.get("/studentprofile/:username",(req,res)=>{
+//     for(let key in student){
+//         if(student[key].username==req.params.username)
+//         res.json(student)
+//     }
+//     res.json('STUDENT NOT FOUND')
+// });
+
+// //change student password
+// server.put("/resetstudentPassword/:username",(req,res)=>{
+//     for(let key in Student){
+//         if (admin[key].username==req.body.username){
+//         admin[key].password==req.body.password;
+//     res.json("Student password changed SUCCESSFULLY")}
+//     }
+//     res.json("YOU ARE NOT ALLOWED")
+// });
+
+// //let a student view their course
+// server.get("/viewcourses/:role",(req,res)=>{
+//     if(req.params.role=="student"){
+    
+//         res.json(Courses)
+//     }
+//     res.json("THIS COURSE IS NOT AVAILABLE FOR YOU")
+// });
+
+// //to get a particular teacher as a teacher
+// server.get("/get-teacher/:role",(req,res)=>{
+//     for(let key in Teacher){
+//         if(teacher[key].username==req.body.username&& req.params.role=="teacher"){
+//             res.json(teacher[key].username)
+//         }
+//     }res.json("NOT FOUND")
+// });
+// //change teacher password
+// server.put("/resetteacherPassword/:username",(req,res)=>{
+//     for(let key in Teacher){
+//         if (teacher[key].username==req.body.username)
+//         (admin[key].password==req.body.password)(
+//     res.json("Teacher password changed SUCCESSFULLY"))
+//     }res.json("INVALID CODE")
+// });
+
+
+// //get students as a teacher
+// server.get("/get-student/:username",(req,res)=>{
+//     for(let key in Teacher)
+//     if(teacher[key].username==req.params.username){
+//         res.json(student);
+//     }
+//     res.json("UNAVAILABLE")
+// });
+
+
+// server.use((req,res,next)=>{
+//     next("Page not available");
+// });
+// server.use((error,req,res, next)=>{
+//     console.log(error);
+//     res.status(400).json(error);
+// });
+
+
+// server.listen(3000,()=>console.log('Listen on port 3000...'));
+
+const express = require("express"); //import express module
+const server = express(); //initialising the server that is getting started, call express function
+
+server.use(express.json());
+
+//ADMIN
+/*Username
+Password
+Create Student
+Update Student*/
+
+let Admin = [];
+
+let Teacher = [];
+
+let Student = [];
+
+let Courses = [];
+
+server.post("/register/:role", (req, res) => {
+  if (req.body.role === "admin") {
+    Admin.push(req.body);
+  } else if (req.body.role === "teacher") {
+    Teacher.push(req.body);
+  } else if (req.body.role === "student") {
+    req.body.enrolledCourses = []; 
+    Student.push(req.body);
+  } else {
+    res.json("Invalid role");
+  }
+  res.json("Done");
+});
+
+server.post("/login", (req, res) => {
+  const info = req.body;
+  if (req.body.role === "admin") {
+    let validAdmin = false;
+    for (const admin of Admin) {
+      if (
+        admin.username === info.username &&
+        admin.password === info.password
+      ) {
+        validAdmin = true;
+        break;
+      }
+    }
+    if (validAdmin) {
+      res.status(200).json("User logged in successfully");
+    } else {
+      res.status(400).json("Invalid username or password");
+    }
+  } else if (req.body.role === "teacher") {
+    let validTeacher = false;
+    for (const admin of Teacher) {
+      if (
+        admin.username === info.username &&
+        admin.password === info.password
+      ) {
+        validTeacher = true;
+        break;
+      }
+    }
+    if (validTeacher) {
+      res.status(200).json("User logged in successfully");
+    } else {
+      res.status(400).json("Invalid username or password");
+    }
+  } else if (req.body.role === "student") {
+    let validStudent = false;
+    for (const admin of Student) {
+      if (
+        admin.username === info.username &&
+        admin.password === info.password
+      ) {
+        validStudent = true;
+        break;
+      }
+    }
+    if (validStudent) {
+      res.status(200).json("User logged in successfully");
+    } else {
+      res.status(400).json("Invalid username or password");
+    }
+  } else {
+    res.json("Invalid role.");
+  }
+});
+
+server.get("/get-admin", (req, res) => {
+  res.json(Admin);
+});
+
+server.get("/get-all-students/:role", (req, res) => {
+  if (req.params.role === "admin") {
+    res.json(Student);
+  } else {
+    res.json("UNAUTHORISED");
+  }
+});
+
+server.get("/get-teachers/:role", (req, res) => {
+  if (req.params.role === "admin") {
+    res.json(Teacher);
+  } else {
+    res.json("UNAUTHORISED");
+  }
+});
+
+server.post("/create-course/:role", (req, res) => {
+  if (req.params.role === "admin") {
+    Courses.push(req.body);
+    res.json("Course created successfully");
+  } else {
+    res.json("UNAUTHORISED");
+  }
+});
+
+server.get("/get-courses", (req, res) => {
+  res.json(Courses);
+});
+
+server.delete("/delete-course/:role", (req, res) => {
+  if (req.params.role === "admin") {
+    const index = Courses.findIndex((course) => course.code === req.body.code);
+    if (index !== -1) {
+      const deletedCourse = Courses.splice(index, 1);
+      res.json(`${deletedCourse[0].code} deleted successfully`);
+    } else {
+      res.json("Course code does not exist");
+    }
+  } else {
+    res.json("Unauthorized");
+  }
+});
+ 
+server.delete("/delete-student/:role", (req, res) => {
+  if (req.params.role === "admin") {
+    const index = Student.findIndex(
+      (stu) => stu.username === req.body.username
+    );
+    if (index !== -1) {
+      const deletedStudent = Student.splice(index, 1);
+      res.json(`${deletedStudent[0].username} deleted successfully`);
+    } else {
+      res.json("Student does not exist");
+    }
+  } else {
+    res.json("Unauthorized");
+  }
+});
+
+server.delete("/delete-teacher/:role", (req, res) => {
+  if (req.params.role === "admin") {
+    const index = Teacher.findIndex(
+      (teach) => teach.username === req.body.username
+    );
+    if (index !== -1) {
+      const deletedTeacher = Teacher.splice(index, 1);
+      res.json(`${deletedTeacher[0].username} deleted  successfully`);
+    } else {
+      res.json("Student does not exist");
+    }
+  } else {
+    res.json("Unauthorized");
+  }
+});
+
+server.put("/reset-password", (req, res) => {
+  const { username, password } = req.body;
+  if (req.body.role === "admin") {
+    const adminIndex = Admin.findIndex((admin) => admin.username === username);
+    if (adminIndex !== -1) {
+      Admin[adminIndex].password = password;
+      res.json("Password reset successfully");
+    } else {
+      res.status(404).json("Admin not found");
+    }
+  } else if (req.body.role === "teacher") {
+    const teacherIndex = Teacher.findIndex(
+      (teacher) => teacher.username === username
+    );
+    if (teacherIndex !== -1) {
+      Teacher[teacherIndex].password = password;
+      res.json("Password reset successfully");
+    } else {
+      res.status(404).json("Teacher not found");
+    }
+  } else if (req.body.role === "student") {
+    const studentIndex = Student.findIndex(
+      (student) => student.username === username
+    );
+    if (studentIndex !== -1) {
+      Student[studentIndex].password = password;
+      res.json("Password reset successfully");
+    } else {
+      res.status(404).json("Student not found");
+    }
+  } else {
+    res.status(400).json("Invalid role.");
+  }
+});
+
+server.post("/enroll-course/:role", (req, res) => {
+  if (req.params.role === "student") {
+    const { username, code } = req.body;
+    const student = Student.find((stu) => stu.username === username);
+    if (!student) {
+      res.status(404).json("Student not found");
+      return;
+    }
+    const course = Courses.find((c) => c.code === code);
+    if (!course) {
+      res.status(404).json("Course not found");
+      return;
+    }
+
+    if (student.enrolledCourses.includes(code)) {
+      res.status(400).json("Student is already enrolled in this course");
+      return;
+    }
+    student.enrolledCourses.push(code);
+
+    res.json("Student enrolled in the course successfully");
+  } else {
+    res.json("Unauthorized");
+  }
+});
+
+server.get("/get-enrolled-courses/:role", (req, res) => {
+  if (req.params.role === "student") {
+    const { username } = req.body;
+    const student = Student.find((stu) => stu.username === username);
+
+    if (!student) {
+      res.status(404).json("Student not found");
+      return;
+    }
+
+    const enrolledCourseCodes = student.enrolledCourses;
+    res.json(enrolledCourseCodes);
+  } else {
+    res.json("Unauthorized");
+  }
+});
+
+server.delete("/drop-course/:role", (req, res) => {
+  if (req.params.role === "student") {
+    const { username, code } = req.body;
+
+    const student = Student.find((stu) => stu.username === username);
+
+    if (!student) {
+      res.status(404).json("Student not found");
+      return;
+    }
+
+    const courseIndex = student.enrolledCourses.indexOf(code);
+
+    if (courseIndex === -1) {
+      res.status(400).json("Student is not enrolled in this course");
+      return;
+    }
+
+    student.enrolledCourses.splice(courseIndex, 1);
+
+    res.json("Course dropped successfully");
+  } else {
+    res.json("Unauthorized");
+  }
+});
+
+server.get("/get-student-profile/:username", (req, res) => {
+  const username = req.params.username;
+  const student = Student.find((stu) => stu.username === username);
+
+  if (!student) {
+    res.status(404).json("Student not found");
+    return;
+  }
+
+  res.json(student);
+});
+
+server.get("/get-students/:role", (req, res) => {
+    if (req.params.role === "teacher") {
+      const { teacher, code } = req.body;
+
+      const teacherInfo = Teacher.find(
+        (teach) => teach.username === teacher
+      );
+      if (!teacherInfo) {
+        res.status(404).json("Teacher not found");
+        return;
+      }
+      const course = Courses.find((c) => c.code === code);
+      if (!course) {
+        res.status(404).json("Course not found");
+        return;
+      }
+
+      const enrolledStudents = Student.filter((stu) =>
+        stu.enrolledCourses.includes(code)
+      );
+      res.json(enrolledStudents);
+    } else {
+      res.json("UNAUTHORISED");
+    }
+});
+
+server.get("/get-teacher-profile/:username", (req, res) => {
+  const username = req.params.username;
+  const teacher = Teacher.find((teach) => teach.username === username);
+
+  if (!teacher) {
+    res.status(404).json("Teacher not found");
+    return;
+  }
+
+  res.json(teacher);
+});
+
+
+
+//should be the last thing
+server.listen(3000, () => {
+  console.log("Hello world");
+});
+
+
